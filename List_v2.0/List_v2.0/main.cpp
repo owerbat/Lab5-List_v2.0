@@ -1,7 +1,7 @@
-#include "List.h"
+#include "HeadList.h"
 
 int main() {
-	TList<int> l;
+	THeadList<int> l;
 	for (int i = 0; i < 10; i++) {
 		l.InsFirst(i * 10);
 	}
