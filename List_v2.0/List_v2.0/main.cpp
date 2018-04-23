@@ -1,7 +1,7 @@
-#include "HeadList.h"
+#include "Polynom.h"
 
 int main() {
-	THeadList<int> l;
+	/*THeadList<int> l;
 	for (int i = 0; i < 10; i++) {
 		l.InsFirst(i * 10);
 	}
@@ -21,7 +21,34 @@ int main() {
 	l.DelCurr();
 	l.DelLast();
 
-	l.Print();
+	l.Print();*/
+
+
+	/*try {
+		TMonom l(8, 1, 2, 3), m(2, 1, 2, 3), n(4, 4, 5, 6);
+		l.Print(); cout << endl; m.Print(); cout << endl; n.Print(); cout << endl;
+		cout << "l + m = "; (l + m).Print();
+		cout << endl << "l - m = "; (l - m).Print();
+		cout << endl << "n * m = "; (n * m).Print();
+		cout << endl << "n / m = "; (n / m).Print();
+	}
+	catch (char * str) {
+		cout << endl << str << endl;
+	}*/
+
+
+
+	/*TMonom l(8, 1, 2, 3), m(2, 1, 2, 3), n(4, 4, 5, 6);
+	if (n < m) {
+		cout << "OK\n";
+	}
+	else {
+		cout << "NOT OK\n";
+	}*/
+
+
+
+
 
 	return 0;
 }

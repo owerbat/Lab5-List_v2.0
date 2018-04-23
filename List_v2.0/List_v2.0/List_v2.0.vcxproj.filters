@@ -26,5 +26,11 @@
     <ClInclude Include="HeadList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Polynom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Monom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
