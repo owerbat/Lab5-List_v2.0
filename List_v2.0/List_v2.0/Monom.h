@@ -8,25 +8,10 @@ public:
 	int y;
 	int z;
 
-	TMonom(double c = 0.0, int _x = 0, int _y = 0, int _z = 0) {
-		coeff = c;
-		x = _x;
-		y = _y;
-		z = _z;
-	}
-	TMonom(const TMonom &m) {
-		coeff = m.coeff;
-		x = m.x;
-		y = m.y;
-		z = m.z;
-	}
+	TMonom(double c = 0.0, int _x = 0, int _y = 0, int _z = 0);
+	TMonom(const TMonom &m);
 
-	TMonom &operator=(const TMonom &m) {
-		coeff = m.coeff;
-		x = m.x;
-		y = m.y;
-		z = m.z;
-	}
+	TMonom &operator=(const TMonom &m);
 
 	bool operator<(const TMonom &m)  { return (x * 100 + y * 10 + z) < (m.x * 100 + m.y * 10 + m.z); }
 	bool operator>(const TMonom &m)  { return (x * 100 + y * 10 + z) > (m.x * 100 + m.y * 10 + m.z); }
@@ -44,6 +29,28 @@ public:
 };
 
 
+TMonom::TMonom(double c, int _x, int _y, int _z) {
+	coeff = c;
+	x = _x;
+	y = _y;
+	z = _z;
+}
+
+TMonom::TMonom(const TMonom &m) {
+	coeff = m.coeff;
+	x = m.x;
+	y = m.y;
+	z = m.z;
+}
+
+TMonom &TMonom::operator=(const TMonom &m) {
+	coeff = m.coeff;
+	x = m.x;
+	y = m.y;
+	z = m.z;
+
+	return *this;
+}
 
 TMonom TMonom::operator+(const TMonom &m) {
 	if ((x != m.x) || (y != m.y) || (z != m.z)) {

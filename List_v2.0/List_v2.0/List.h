@@ -39,6 +39,8 @@ public:
 	bool IsEnd() { return pCurr == pStop; }
 	void GoNext() { pPrev = pCurr; pCurr = pCurr->pNext; }
 
+	bool IsEmpty() { size == 0; }
+
 	virtual void InsFirst(const T &elem);
 	virtual void InsCurr(const T &elem);
 	virtual void InsLast(const T &elem);
