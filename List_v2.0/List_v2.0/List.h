@@ -46,6 +46,8 @@ public:
 	virtual void DelFirst();
 	virtual void DelCurr();
 	virtual void DelLast();
+
+	void Print();
 };
 
 
@@ -65,7 +67,7 @@ void TList<T>::InsFirst(const T &elem) {
 	if (!size) {
 		pFirst = pLast = pCurr = tmp;
 		pFirst->pNext = pStop;
-		pPrev->pNext = pFirst;
+		//pPrev->pNext = pFirst;
 	}
 	else {
 		tmp->pNext = pFirst;
@@ -94,10 +96,10 @@ void TList<T>::InsLast(const T &elem) {
 
 template <class T>
 void TList<T>::InsCurr(const T &elem) {
-	if (!size) {
+	if (!size || (pCurr == pFirst)) {
 		InsFirst(elem);
 	}
-	else if (pCurr == pStop) {
+	else if (pCurr->pNext == pStop) {
 		InsLast(elem);
 	}
 	else {
@@ -124,7 +126,7 @@ void TList<T>::DelFirst() {
 			pFirst = pFirst->pNext;
 			delete tmp;
 			pCurr = pFirst;
-			pPrev->pNext = pFirst;
+			//pPrev->pNext = pFirst;
 			pPrev = nullptr;
 		}
 		size--;
@@ -138,10 +140,11 @@ void TList<T>::DelLast() {
 			DelFirst();
 		}
 		else {
-			for (Reset(); pCurr->pNext != pStop; GoNext()) {}
-			delete pLast;
+			for (Reset(); pCurr->pNext != pLast; GoNext()) {}
+			TLink<T> *tmp = pLast;
 			pCurr->pNext = pStop;
 			pLast = pCurr;
+			delete tmp;
 			size--;
 		}
 	}
@@ -150,7 +153,7 @@ void TList<T>::DelLast() {
 template <class T>
 void TList<T>::DelCurr() {
 	if (size) {
-		if (size == 1) {
+		if ((size == 1) || (pCurr == pFirst)) {
 			DelFirst();
 		}
 		else if (pCurr == pLast) {
@@ -163,5 +166,13 @@ void TList<T>::DelCurr() {
 			pCurr = pPrev->pNext;
 			size--;
 		}
+	}
+}
+
+template <class T>
+void TList<T>::Print() {
+	int i = 0;
+	for (Reset(); !IsEnd(); GoNext(), i++) {
+		cout << i << ") " << pCurr->value << endl;
 	}
 }
