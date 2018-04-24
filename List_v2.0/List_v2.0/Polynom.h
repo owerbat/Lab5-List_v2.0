@@ -44,11 +44,13 @@ TPolynom::TPolynom(TMonom *arr, int _size) : THeadList<TMonom>() {
 }
 
 TPolynom::TPolynom(TPolynom &p) : THeadList<TMonom>() {
-	pHead->value.coeff = 0.0;
-	pHead->value.z = -1;
+	if (p.size) {
+		pHead->value.coeff = 0.0;
+		pHead->value.z = -1;
 
-	for (p.Reset(); !p.IsEnd(); p.GoNext()) {
-		InsByOrder(p.pCurr->value);
+		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
+			InsByOrder(p.pCurr->value);
+		}
 	}
 }
 
@@ -88,4 +90,118 @@ void TPolynom::InsByOrder(const TMonom &m) {
 	}
 
 	InsLast(m);
+}
+
+TPolynom TPolynom::operator+(const TMonom &m) {
+	if (size) {
+		TPolynom res = *this;
+		res.InsByOrder(m);
+		return res;
+	}
+	else {
+		TMonom arr[1] = { m };
+		TPolynom res(arr, 1);
+		return res;
+	}
+}
+
+TPolynom TPolynom::operator-(const TMonom &m) {
+	if(size){
+		TPolynom res = *this;
+		res.InsByOrder(m * (-1.0));
+		return res;
+	}
+	else {
+		TMonom arr[1] = { m * (-1.0)};
+		TPolynom res(arr, 1);
+		return res;
+	}
+}
+
+TPolynom TPolynom::operator*(const TMonom &m) {
+	if (size) {
+		TPolynom res = *this;
+
+		for (res.Reset(); !res.IsEnd(); res.GoNext()) {
+			res.pCurr->value = res.pCurr->value * m;
+		}
+
+		return res;
+	}
+	else {
+		TPolynom res;
+		//TMonom m(0, 0, 0, 0);
+		//res.InsByOrder(m);
+		return res;
+	}
+}
+
+TPolynom TPolynom::operator+(TPolynom &p) {
+	if(size) {
+		TPolynom res = *this;
+
+		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
+			res.InsByOrder(p.pCurr->value);
+		}
+
+		return res;
+	}
+	else {
+		TPolynom res = p;
+		return res;
+	}
+}
+
+TPolynom TPolynom::operator-(TPolynom &p) {
+	if (size) {
+		TPolynom res = *this;
+
+		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
+			res.InsByOrder((p.pCurr->value) * (-1.0));
+		}
+
+		return res;
+	}
+	else {
+		TMonom m(-1.0, 0, 0, 0);
+		TPolynom res = p * m;
+		return res;
+	}
+}
+
+TPolynom TPolynom::operator*(TPolynom &p) {
+	if (size && p.size) {
+		TPolynom tmp, res;
+
+		for (Reset(); !IsEnd(); GoNext()) {
+			tmp = tmp + (p * pCurr->value);
+		}
+
+		for (tmp.Reset(); !tmp.IsEnd(); tmp.GoNext()) {
+			res.InsByOrder(tmp.pCurr->value);
+		}
+
+		return res;
+	}
+	else {
+		TPolynom res;
+		//TMonom m(0, 0, 0, 0);
+		//res.InsByOrder(m);
+		return res;
+	}
+}
+
+void TPolynom::Print() {
+	if (size) {
+		Reset();
+		(pCurr->value).Print();
+		GoNext();
+		for (; !IsEnd(); GoNext()) {
+			cout << " + ";
+			(pCurr->value).Print();
+		}
+	}
+	else {
+		cout << "0";
+	}
 }

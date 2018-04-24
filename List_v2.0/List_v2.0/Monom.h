@@ -20,12 +20,16 @@ public:
 	bool operator<=(const TMonom &m) { return (x * 100 + y * 10 + z) <= (m.x * 100 + m.y * 10 + m.z); }
 	bool operator>=(const TMonom &m) { return (x * 100 + y * 10 + z) >= (m.x * 100 + m.y * 10 + m.z); }
 
+	TMonom operator*(double a);
+
 	TMonom operator+(const TMonom &m);
 	TMonom operator-(const TMonom &m);
 	TMonom operator*(const TMonom &m);
 	TMonom operator/(const TMonom &m);
 
 	void Print();
+
+	friend TMonom operator*(const TMonom &m, double a);
 };
 
 
@@ -50,6 +54,12 @@ TMonom &TMonom::operator=(const TMonom &m) {
 	z = m.z;
 
 	return *this;
+}
+
+TMonom TMonom::operator*(double a) {
+	TMonom res = *this;
+	res.coeff *= a;
+	return res;
 }
 
 TMonom TMonom::operator+(const TMonom &m) {
@@ -109,5 +119,16 @@ TMonom TMonom::operator/(const TMonom &m) {
 }
 
 void TMonom::Print() {
-	cout << "(" << coeff << ")x^" << x << "y^" << y << "z^" << z;
+	if (coeff) {
+		cout << "(" << coeff << ")x^" << x << "y^" << y << "z^" << z;
+	}
+	else {
+		cout << "0";
+	}
+}
+
+TMonom operator*(const TMonom &m, double a) {
+	TMonom res = m;
+	res.coeff *= a;
+	return res;
 }
