@@ -13,12 +13,12 @@ public:
 
 	TMonom &operator=(const TMonom &m);
 
-	bool operator<(const TMonom &m)  { return (x * 100 + y * 10 + z) < (m.x * 100 + m.y * 10 + m.z); }
-	bool operator>(const TMonom &m)  { return (x * 100 + y * 10 + z) > (m.x * 100 + m.y * 10 + m.z); }
-	bool operator==(const TMonom &m) { return (x * 100 + y * 10 + z) == (m.x * 100 + m.y * 10 + m.z); }
-	bool operator!=(const TMonom &m) { return (x * 100 + y * 10 + z) != (m.x * 100 + m.y * 10 + m.z); }
-	bool operator<=(const TMonom &m) { return (x * 100 + y * 10 + z) <= (m.x * 100 + m.y * 10 + m.z); }
-	bool operator>=(const TMonom &m) { return (x * 100 + y * 10 + z) >= (m.x * 100 + m.y * 10 + m.z); }
+	bool operator<(const TMonom &m);  //{ return (x * 100 + y * 10 + z) <  (m.x * 100 + m.y * 10 + m.z); }
+	bool operator>(const TMonom &m);  //{ return (x * 100 + y * 10 + z) >  (m.x * 100 + m.y * 10 + m.z); }
+	bool operator==(const TMonom &m); //{ return (x * 100 + y * 10 + z) == (m.x * 100 + m.y * 10 + m.z); }
+	bool operator!=(const TMonom &m); //{ return (x * 100 + y * 10 + z) != (m.x * 100 + m.y * 10 + m.z); }
+	bool operator<=(const TMonom &m); //{ return (x * 100 + y * 10 + z) <= (m.x * 100 + m.y * 10 + m.z); }
+	bool operator>=(const TMonom &m); //{ return (x * 100 + y * 10 + z) >= (m.x * 100 + m.y * 10 + m.z); }
 
 	TMonom operator*(double a);
 
@@ -54,6 +54,77 @@ TMonom &TMonom::operator=(const TMonom &m) {
 	z = m.z;
 
 	return *this;
+}
+
+bool TMonom::operator<(const TMonom &m) {
+	if (x < m.x) {
+		return true;
+	}
+	else if (x == m.x) {
+		if (y < m.y) {
+			return true;
+		}
+		else if (y == m.y) {
+			if (z < m.z) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
+bool TMonom::operator>(const TMonom &m) {
+	if (x > m.x) {
+		return true;
+	}
+	else if (x == m.x) {
+		if (y > m.y) {
+			return true;
+		}
+		else if (y == m.y) {
+			if (z > m.z) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
+bool TMonom::operator==(const TMonom &m) {
+	if ((x == m.x) && (y == m.y) && (z == m.z)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool TMonom::operator>=(const TMonom &m) {
+	return !(*this < m);
+}
+
+bool TMonom::operator<=(const TMonom &m) {
+	return !(*this > m);
+}
+
+bool TMonom::operator!=(const TMonom &m) {
+	return !(*this == m);
 }
 
 TMonom TMonom::operator*(double a) {
