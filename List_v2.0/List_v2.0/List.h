@@ -159,7 +159,7 @@ void TList<T>::DelCurr() {
 			DelFirst();
 		}
 		else if (pCurr == pLast) {
-			DelCurr();
+			DelLast();
 		}
 		else {
 			TLink<T> *tmp = pCurr;

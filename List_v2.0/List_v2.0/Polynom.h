@@ -44,10 +44,10 @@ TPolynom::TPolynom(TMonom *arr, int _size) : THeadList<TMonom>() {
 }
 
 TPolynom::TPolynom(TPolynom &p) : THeadList<TMonom>() {
-	if (p.size) {
-		pHead->value.coeff = 0.0;
-		pHead->value.z = -1;
+	pHead->value.coeff = 0.0;
+	pHead->value.z = -1;
 
+	if (p.size){
 		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
 			InsByOrder(p.pCurr->value);
 		}
@@ -59,8 +59,10 @@ TPolynom &TPolynom::operator=(TPolynom &p) {
 		DelFirst();
 	}
 
-	for (p.Reset(); !p.IsEnd(); p.GoNext()) {
-		InsByOrder(p.pCurr->value);
+	if (p.size) {
+		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
+			InsByOrder(p.pCurr->value);
+		}
 	}
 
 	return *this;
@@ -137,7 +139,7 @@ TPolynom TPolynom::operator*(const TMonom &m) {
 }
 
 TPolynom TPolynom::operator+(TPolynom &p) {
-	if(size) {
+	if(size && p.size) {
 		TPolynom res = *this;
 
 		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
@@ -146,14 +148,21 @@ TPolynom TPolynom::operator+(TPolynom &p) {
 
 		return res;
 	}
-	else {
+	else if(!size && p.size) {
 		TPolynom res = p;
+		return res;
+	}
+	else if (size && !p.size) {
+		return *this;
+	}
+	else {
+		TPolynom res;
 		return res;
 	}
 }
 
 TPolynom TPolynom::operator-(TPolynom &p) {
-	if (size) {
+	if (size && p.size) {
 		TPolynom res = *this;
 
 		for (p.Reset(); !p.IsEnd(); p.GoNext()) {
@@ -162,9 +171,16 @@ TPolynom TPolynom::operator-(TPolynom &p) {
 
 		return res;
 	}
-	else {
+	else if(!size && p.size) {
 		TMonom m(-1.0, 0, 0, 0);
 		TPolynom res = p * m;
+		return res;
+	}
+	else if (size && !p.size) {
+		return *this;
+	}
+	else {
+		TPolynom res;
 		return res;
 	}
 }

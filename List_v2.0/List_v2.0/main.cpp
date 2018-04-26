@@ -48,21 +48,28 @@ int main() {
 
 
 
-	TMonom *m = new TMonom[1], *n = new TMonom[1];
+	TMonom *m = new TMonom[2], *n = new TMonom[2];
 
-	m[0].coeff = 2.0;
+	m[0].coeff = 1.0;
 	m[0].x = 1;
-	m[0].y = m[0].z = 2;
+	m[0].y = m[0].z = 0;
 
-	n[0].coeff = 4.0;
-	n[0].x = 3;
-	n[0].y = n[0].z = 4;
+	m[1].coeff = 1.0;
+	m[1].x = m[1].y = m[1].z = 0;
 
-	cout << "m = "; m[0].Print(); cout << "\nn = "; n[0].Print(); cout << endl;
+	n[0].coeff = 1.0;
+	n[0].x = 1;
+	n[0].y = n[0].z = 0;
 
-	TPolynom p(m, 1), q(n, 1);
-	p.DelFirst();
-	TPolynom res = q * p;
+	n[1].coeff = -1.0;
+	n[1].x = n[1].y = n[1].z = 0;
+
+	//cout << "m = "; m[0].Print(); cout << "\nn = "; n[0].Print(); cout << endl;
+
+	TPolynom p(m, 2), q(n, 2);
+	cout << "p = "; p.Print(); cout << "\nq = "; q.Print(); cout << endl;
+
+	TPolynom res = p * q;
 	res.Print();
 	cout << endl;
 
