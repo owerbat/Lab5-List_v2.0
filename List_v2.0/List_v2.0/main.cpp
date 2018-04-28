@@ -38,17 +38,17 @@ int main() {
 
 
 
-	/*TMonom l(8, 1, 2, 3), m(2, 1, 2, 3), n(4, 4, 5, 6);
-	if (n < m) {
+	TMonom l(8, 1, 2, 3), m(2, 1, 2, 3), n(4, 4, 5, 6);
+	if (m < n) {
 		cout << "OK\n";
 	}
 	else {
 		cout << "NOT OK\n";
-	}*/
+	}
 
 
 
-	TMonom *m = new TMonom[2], *n = new TMonom[2];
+	/*TMonom *m = new TMonom[2], *n = new TMonom[2];
 
 	m[0].coeff = 1.0;
 	m[0].x = 1;
@@ -71,7 +71,7 @@ int main() {
 
 	TPolynom res = p * q;
 	res.Print();
-	cout << endl;
+	cout << endl;*/
 
 	return 0;
 }

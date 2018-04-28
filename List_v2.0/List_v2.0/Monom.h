@@ -13,8 +13,8 @@ public:
 
 	TMonom &operator=(const TMonom &m);
 
-	bool operator<(const TMonom &m);  //{ return (x * 100 + y * 10 + z) <  (m.x * 100 + m.y * 10 + m.z); }
-	bool operator>(const TMonom &m);  //{ return (x * 100 + y * 10 + z) >  (m.x * 100 + m.y * 10 + m.z); }
+	bool operator<(const TMonom &m); //{ return (x * 100 + y * 10 + z) < (m.x * 100 + m.y * 10 + m.z); }
+	bool operator>(const TMonom &m); //{ return (x * 100 + y * 10 + z) > (m.x * 100 + m.y * 10 + m.z); }
 	bool operator==(const TMonom &m); //{ return (x * 100 + y * 10 + z) == (m.x * 100 + m.y * 10 + m.z); }
 	bool operator!=(const TMonom &m); //{ return (x * 100 + y * 10 + z) != (m.x * 100 + m.y * 10 + m.z); }
 	bool operator<=(const TMonom &m); //{ return (x * 100 + y * 10 + z) <= (m.x * 100 + m.y * 10 + m.z); }

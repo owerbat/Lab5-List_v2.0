@@ -101,7 +101,7 @@ void TList<T>::InsCurr(const T &elem) {
 	if (!size || (pCurr == pFirst)) {
 		InsFirst(elem);
 	}
-	else if (pCurr->pNext == pStop) {
+	else if (pPrev->pNext == pStop /*pCurr->pNext == pStop*/) {
 		InsLast(elem);
 	}
 	else {
